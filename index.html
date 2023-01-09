@@ -1,17 +1,42 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Pokemon Ditto</title>
+    <style></style>
 </head>
 <body>
 
-<button onclick="sendRequest()">Envoyer la requête</button>
+<div id="app">
+    <h1>{{ name }}</h1>
+    <p>Type: {{ type }}</p>
+    <p>Height: {{ height }}</p>
+    <p>Weight: {{ weight }}</p>
+</div>
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.prod.js"></script>
 
-<script src="vue.js"></script>
+<script>
+    const apiURL = "https://pokeapi.co/api/v2/pokemon/ditto";
+    const config = {};
+
+    axios.get(apiURL, config)
+        .then(response => {
+            const app = new Vue({
+                el: '#app',
+                data: {
+                    name: response.data.name,
+                    type: response.data.types[0].type.name,
+                    height: response.data.height,
+                    weight: response.data.weight
+                }
+            });
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 </body>
 </html>
