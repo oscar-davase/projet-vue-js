@@ -16,7 +16,7 @@
 <script src="https://unpkg.com/vue@3"></script>
 <script>
     const apiURL =
-        "https://pokeapi.co/api/v2/pokemon/ditto";
+        "https://api.le-systeme-solaire.net/rest/bodies/";
     const config = {
     };
 
@@ -34,7 +34,7 @@
             fetchDataAsync: async function () {
                 try {
                     const response = await axios.get(apiURL)
-                    this.commits = response.data.ditto
+                    this.commits = response.data.bodies
                 } catch(error) {
                     console.log(error);
                 }
